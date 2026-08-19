@@ -29,7 +29,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
             padding: 25px;
         }
@@ -62,6 +62,18 @@
             margin-top: 5px;
         }
 
+        .section-title {
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .updated {
+            text-align: center;
+            margin-top: 25px;
+            color: #94a3b8;
+        }
+
         footer {
             text-align: center;
             color: #64748b;
@@ -83,35 +95,103 @@
 
         <div class="card">
             <div class="icon">🌡️</div>
-            <div class="value">-- °C</div>
+            <div class="value" id="temperature">-- °C</div>
             <div class="label">Teplota</div>
         </div>
 
         <div class="card">
             <div class="icon">💧</div>
-            <div class="value">-- %</div>
+            <div class="value" id="humidity">-- %</div>
             <div class="label">Vlhkost</div>
         </div>
 
         <div class="card">
             <div class="icon">🌧️</div>
-            <div class="value">-- mm</div>
+            <div class="value" id="rain_today">-- mm</div>
             <div class="label">Srážky dnes</div>
         </div>
 
         <div class="card">
             <div class="icon">📊</div>
-            <div class="value">-- hPa</div>
+            <div class="value" id="pressure">-- hPa</div>
             <div class="label">Tlak</div>
         </div>
 
     </div>
 
+    <div class="section-title">Statistiky srážek</div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="value" id="rain_week">-- mm</div>
+            <div class="label">Posledních 7 dní</div>
+        </div>
+
+        <div class="card">
+            <div class="value" id="rain_month">-- mm</div>
+            <div class="label">Tento měsíc</div>
+        </div>
+
+        <div class="card">
+            <div class="value" id="rain_year">-- mm</div>
+            <div class="label">Tento rok</div>
+        </div>
+
+    </div>
+
+    <div class="updated">
+        Poslední aktualizace:
+        <span id="updated">--</span>
+    </div>
+
 </div>
 
 <footer>
-    Veltruby Meteo • vlastní meteostanice
+    Meteostanice Midoor • Veltruby
 </footer>
+
+<script>
+async function loadMeteo() {
+    try {
+        const response = await fetch('meteo.json?time=' + Date.now(), {
+            cache: 'no-store'
+        });
+
+        const data = await response.json();
+
+        document.getElementById('temperature').textContent =
+            Number(data.temperature).toFixed(1) + ' °C';
+
+        document.getElementById('humidity').textContent =
+            Number(data.humidity).toFixed(1) + ' %';
+
+        document.getElementById('pressure').textContent =
+            Number(data.pressure).toFixed(1) + ' hPa';
+
+        document.getElementById('rain_today').textContent =
+            Number(data.rain_today).toFixed(1) + ' mm';
+
+        document.getElementById('rain_week').textContent =
+            Number(data.rain_week).toFixed(1) + ' mm';
+
+        document.getElementById('rain_month').textContent =
+            Number(data.rain_month).toFixed(1) + ' mm';
+
+        document.getElementById('rain_year').textContent =
+            Number(data.rain_year).toFixed(1) + ' mm';
+
+        document.getElementById('updated').textContent =
+            data.updated || '--';
+
+    } catch (error) {
+        console.error('Chyba načtení meteo.json:', error);
+    }
+}
+
+loadMeteo();
+setInterval(loadMeteo, 60000);
+</script>
 
 </body>
 </html>
