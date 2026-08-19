@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veltruby Meteo</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            padding: 35px 20px;
+            text-align: center;
+            background: #1e293b;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            color: #94a3b8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 35px;
+        }
+
+        .value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .label {
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌦️ Veltruby Meteo</h1>
+    <p>Aktuální počasí z vlastní meteostanice</p>
+</header>
+
+<div class="container">
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">🌡️</div>
+            <div class="value">-- °C</div>
+            <div class="label">Teplota</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">💧</div>
+            <div class="value">-- %</div>
+            <div class="label">Vlhkost</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌧️</div>
+            <div class="value">-- mm</div>
+            <div class="label">Srážky dnes</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">📊</div>
+            <div class="value">-- hPa</div>
+            <div class="label">Tlak</div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    Veltruby Meteo • vlastní meteostanice
+</footer>
+
+</body>
+</html>
